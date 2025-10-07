@@ -1,0 +1,13 @@
+input mode 0 reports the status of the 
+up                  1
+down                0
+left                0
+right               1
+z                   1
+x                   0
+enter               0
+and shift keys      0
+and outputs: "00000000 10011000"
+
+input mode 1 returns the latest ascii character pressed
+if "A" is typed it will return "00000000 01000001"

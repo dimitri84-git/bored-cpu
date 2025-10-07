@@ -1,0 +1,35 @@
+scratch calc cpu code
+^1(0)                   sets register 1 to 0
+^i(^8.1)                sets register 8 to the state of the up button
+^i(^9.2)                sets register 9 to the state of the down button
+
+_(^8.^2.6)              if up is not pressed go to instruction 6
+^1+(1)                  increment register 1 by 1
+_(^9.^2.2)              if down is not pressed go to instruction 2
+
+^1-(1)                  decrement register 1 by 1
+_(^2.^2.2)              go to instruction 2
+
+%                       kill the cpu
+
+equivelant c cpu code
+set 1, $0               set register 1 to 0
+set 8, $128             set register 8 to up only
+set 9, $64              set register 9 to down only
+imd 0                   set input mode to 0 (udlrzxes mode)
+
+GetInput:               the "GetInput" label
+sip 15                  set register 15 to the input byte
+jpe 15, 8, Up:          if only up is pressed, jump to the "Up:" label
+jpe 15, 9, Down:        if only down is pressed, jump to the "Down:" label
+jmp GetInput:           jump to the label "GetInput:"
+
+Up:                     the "Up" label
+inc 1                   increment register 1 by 1
+jmp GetInput:           jump to label "GetInput:"
+
+Down:                   the "Down" label
+dec 1                   decrement register 1 by 1
+jmp GetInput            jump to label "GetInput:"
+
+halt                    kill the cpu

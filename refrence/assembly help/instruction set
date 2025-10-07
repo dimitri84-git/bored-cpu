@@ -1,0 +1,70 @@
+param codes
+REG     specifies a register number EX:3
+16V     specifies a 16-bit value EX: "11011001 10011100"
+ADR     specifies a 16-bit memory address EX:"00100110 11011100"
+R/A     means either a register number or a 16-bit mem address
+R/V     means either a register number or a 16-bit value
+LB:     specifies a label that corisponds to a memory address EX:GetKeyboardInput: 
+Str     means a value used only for readability and does not effect program values
+CHR     can be used in place of 16V and converts an ascii character to an 8-bit code EX:A equivelant:"00000000 01000001"
+1/0     mean it only takes a "1" or a "0" EX:"1"
+**#     specifies a binary number with length #
+
+conversion codes
+#**     hex code 16-bit
+$**     decimal 16-Bit
+
+
+
+register/memory code:
+SET REG, R/V           #set register REG to R/V
+
+INC REG          #INCrement register REG by 1
+DEC REG          #DECrement register REG by 1
+
+LOD R/A, REG   #LOaDS the value at address R/A to REG
+STO R/A, REG   #STOres the value from REG to memory at R/A
+
+
+math code:
+ADD REG1, REG2, REG3    #ADDs the values of REG1 & REG2 then stores it to REG3
+SUB REG1, REG2, REG3    #SUBtracts the values of REG1 & REG2 then stores it to REG3
+MUL REG1, REG2, REG3    #MULtiplies the values of REG1 & REG2 then stores it to REG3
+DIV REG1, REG2, REG3    #DIVides the values of REG1 & REG2 then stores it to REG3
+
+SHL REG1, REG2          #SHifts the value of REG1 Left then stores it to REG2
+SHR REG1, REG2          #SHifts the value of REG1 Right then stores it to REG2
+
+NOT REG1, REG2          #inverts the value of REG1 then stores it in REG2
+AND REG1, REG2, REG3    
+ OR REG1, REG2, REG3
+XOR REG1, REG2, REG3
+
+
+jump related code:
+JMZ R/A1, R/A2 OR       #JumP to instruction R/A2 if R/A1 equals Zero
+JMZ R/A, LB:            #JumP to LB: if R/A equals Zero
+
+JPE R/A1, R/A2, R/A3 OR #JumP to R/A3 if R/A1 & R/A2 are Equal
+JPE R/A1, R/A2, LB:     #JumP to LB: if R/A1 & R/A2 are Equal
+
+JMP R/A OR              #JuMPs to R/A
+JMP LB:                 #JuMPs to LB:
+
+EXS Str                 #Starts an EXecution block with id Str
+EXE Str                 #Ends an EXecution block with id Str
+EXC Str                 #runs an EXeCution block with id Str then returns
+
+
+input code:
+IMD 1/0                 #sets the Input MoDe 1=ascii keys 0=up/down/left/right/z/x/enter/shift
+SIP R/A                 #Sets the register or mem address to the InPut byte
+
+
+output:
+DSM 1/0                 #sets the DisPlay Mode 1=graphics 0=ascii
+VRR R/A                 #Reads the VRam value at R/A
+VRW R/A                 #Writes to the VRam address at R/A
+
+misc:
+HALT                    #kills the cpu
